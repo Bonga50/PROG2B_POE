@@ -21,10 +21,12 @@ namespace PROG2B_POE
     public partial class MainWindow : Window
     {
         Pages.AddNewModulePage pgAddMod = new Pages.AddNewModulePage();
-        
+        Pages.ModuleListing pgListMod = new Pages.ModuleListing();
         public MainWindow()
         {
+
             InitializeComponent();
+            FrmNav.Content = pgListMod;
         }
 
 
@@ -47,9 +49,10 @@ namespace PROG2B_POE
             ////Grid.SetRow(stackPanel, 2);
         }
 
-        private void FrmNav_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        private void btnModuleListing_Click(object sender, RoutedEventArgs e)
         {
-
+            Pages.ModuleListing pgListMod = new Pages.ModuleListing();
+            FrmNav.Content = pgListMod;
         }
     }
 }

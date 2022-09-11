@@ -19,7 +19,8 @@ namespace PROG2B_POE.Pages
     /// Interaction logic for AddNewModulePage.xaml
     /// </summary>
     public partial class AddNewModulePage : Page
-    {
+    { 
+        public static List<Projects> ModuleList = new List<Projects>();
         public AddNewModulePage()
         {
             InitializeComponent();
@@ -27,7 +28,17 @@ namespace PROG2B_POE.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            ModuleList.Add(new Projects { 
+                ModuleCode = txtModuleCode.Text,
+                ModuleName = txtModuleName.Text
+            
+            });
 
         }
+    }
+
+    public class Projects {
+        public string ModuleCode { get; set; }
+        public string ModuleName { get; set; }
     }
 }
