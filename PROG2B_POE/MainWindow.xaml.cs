@@ -20,9 +20,36 @@ namespace PROG2B_POE
     /// </summary>
     public partial class MainWindow : Window
     {
+        Pages.AddNewModulePage pgAddMod = new Pages.AddNewModulePage();
+        
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            FrmNav.Content = pgAddMod;
+
+
+            ////Button btnTemp = new Button();
+            ////btnTemp.Background = Brushes.Red;
+            ////btnTemp.BorderBrush = Brushes.Black;
+
+            ////var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
+            ////stackPanel.Children.Add(new Label { Content = "ModuleName" });
+            ////stackPanel.Children.Add(new Button { Content = "Button" });
+
+            ////MainGrid.Children.Add(stackPanel);
+            //////MainGrid.Children.Add(btnTemp);
+            ////Grid.SetColumn(stackPanel, 3);
+            ////Grid.SetRow(stackPanel, 2);
+        }
+
+        private void FrmNav_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
         }
     }
 }
