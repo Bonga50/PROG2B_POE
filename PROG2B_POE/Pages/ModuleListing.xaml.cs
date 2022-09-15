@@ -29,15 +29,28 @@ namespace PROG2B_POE.Pages
         private void ListSearch() {
             if (AddNewModulePage.ModuleList.Count > 0)
             {
+                for (int i = 0; i < AddNewModulePage.ModuleList.Count; i++)
+                {
+                    //Borders for each project
+                    var border = new Border {
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = new Thickness(2,2,2,2) , 
+                        Margin = new Thickness(5,5,5,5),
+                        CornerRadius = new CornerRadius(5)
+                    };
+                    var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
+                    //make border parent to scope the stack pannel
+                    border.Child = stackPanel;
+                    stackPanel.Children.Add(new Label { Content = AddNewModulePage.ModuleList[i].ModuleCode });
+                    stackPanel.Children.Add(new Label { Content = AddNewModulePage.ModuleList[i].ModuleName });
 
+                    grModuleListing.Children.Add(border);
+                    Grid.SetColumn(border, 1);
+                    Grid.SetRow(border, i+2);
 
-                var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
-                stackPanel.Children.Add(new Label { Content = AddNewModulePage.ModuleList[0].ModuleCode });
-                stackPanel.Children.Add(new Label { Content = AddNewModulePage.ModuleList[0].ModuleName });
+                }
 
-                grModuleListing.Children.Add(stackPanel);
-                Grid.SetColumn(stackPanel, 1);
-                Grid.SetRow(stackPanel, 2);
+                
             }
 
         }
