@@ -40,5 +40,8 @@ namespace PROG2B_POE.Pages
     public class Projects {
         public string ModuleCode { get; set; }
         public string ModuleName { get; set; }
+        public int  NumOfCredits { get; set; }
+        public double Duration { get; set; }
+
     }
 }
