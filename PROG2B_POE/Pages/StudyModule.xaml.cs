@@ -20,9 +20,42 @@ namespace PROG2B_POE.Pages
     /// </summary>
     public partial class StudyModule : Page
     {
+        public static List<Double> StudyhrsSave = new List<Double>();
         public StudyModule()
         {
             InitializeComponent();
+            cmbModuleDropDown.ItemsSource = AddNewModulePage.ModuleNames;
+            txtStudyHours.IsEnabled = false;
+            btnSave.IsEnabled = false;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                double previous = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
+                double newhr = previous + Double.Parse(txtStudyHours.Text);
+
+
+                StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
+
+                txtStudyHours.Clear();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+   
+
+        private void cmbModuleDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtStudyHours.IsEnabled = true;
+            btnSave.IsEnabled = true;
         }
     }
 }

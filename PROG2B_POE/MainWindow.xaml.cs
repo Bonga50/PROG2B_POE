@@ -54,5 +54,11 @@ namespace PROG2B_POE
             Pages.ModuleListing pgListMod = new Pages.ModuleListing();
             FrmNav.Content = pgListMod;
         }
+
+        private void btnStudyModule_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.StudyModule pgStudy = new Pages.StudyModule();
+            FrmNav.Content = pgStudy;
+        }
     }
 }

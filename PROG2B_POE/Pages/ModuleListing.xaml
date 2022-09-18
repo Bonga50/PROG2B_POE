@@ -7,39 +7,42 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModuleListing">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Background="White" x:Name="grModuleListing" >
+        
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <!--Titles-->
+            <TextBlock Text="Module" Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15"/>
+            <TextBlock Text="Study Hours &#x0a; Required" Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Center"/>
 
-    <Grid Background="White" x:Name="grModuleListing" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <!--Titles-->
-        <TextBlock Text="Module" Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15"/>
-        <TextBlock Text="Study Hours Required" Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15"/>
-
-        <TextBlock Text="Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right"/>
+            <TextBlock Text="Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right"/>
 
 
-
+        
     </Grid>
+    </ScrollViewer>
 </Page>
