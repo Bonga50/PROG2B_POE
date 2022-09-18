@@ -33,19 +33,37 @@ namespace PROG2B_POE.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            ModuleList.Add(new Projects
+
+            //Errorhandling
+            try
             {
-                ModuleCode = txtModuleCode.Text,
-                ModuleName = txtModuleName.Text,
-                NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
-                HoursPerWeek = double.Parse(txtHrsPerWeek.Text),
-                SemesterStartDate = dpStartDate.SelectedDate.Value,
-                SemesterEndDate = dpEndDate.SelectedDate.Value
+                if (dpStartDate.SelectedDate.Value > dpEndDate.SelectedDate.Value)
+                {
+                    throw new Exception();
+                }
+                
 
-            });
+                ModuleList.Add(new Projects
+                {
+                    ModuleCode = txtModuleCode.Text,
+                    ModuleName = txtModuleName.Text,
+                    NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
+                    HoursPerWeek = double.Parse(txtHrsPerWeek.Text),
+                    SemesterStartDate = dpStartDate.SelectedDate.Value,
+                    SemesterEndDate = dpEndDate.SelectedDate.Value
 
-            ModuleNames.Add(txtModuleName.Text);
-            StudyModule.StudyhrsSave.Add(0);
+                });
+
+                ModuleNames.Add(txtModuleName.Text);
+                StudyModule.StudyhrsSave.Add(0);
+
+            }
+            catch (Exception ez)
+            {
+
+                MessageBox.Show("Error : " + ez.Message);
+            }
+            catch { MessageBox.Show("Error"); }
 
         }
     }

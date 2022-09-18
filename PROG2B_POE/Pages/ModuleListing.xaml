@@ -6,8 +6,10 @@
       xmlns:local="clr-namespace:PROG2B_POE.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ModuleListing">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+      Title="ModuleListing" >
+    <ScrollViewer x:Name="ScrollingList" Height="auto" HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto" CanContentScroll="True" >
+   
         <Grid Background="White" x:Name="grModuleListing" >
         
             
@@ -32,17 +34,55 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+           
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <!--Titles-->
             <TextBlock Text="Module" Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15"/>
-            <TextBlock Text="Study Hours &#x0a; Required" Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Center"/>
+            <TextBlock Text="Study Hours &#x0a;Required Weekly " Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right"/>
+            <TextBlock Text="Total &#x0a;Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right"/>
+            <!--Inner Grid to hold newlly created items-->
+            <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Grid x:Name="grdInnerGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
 
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+                
+            </StackPanel>
 
-        
-    </Grid>
+        </Grid>
     </ScrollViewer>
 </Page>

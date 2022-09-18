@@ -51,8 +51,25 @@ namespace PROG2B_POE.Pages
                       AddNewModulePage.ModuleList[i].SemesterEndDate,
                       AddNewModulePage.ModuleList[i].HoursPerWeek
                       );
+                    //will calculate the remaining hours weekly and total
 
-
+                    double remainingself =SelfStudy - StudyModule.StudyhrsSave[i];
+                    double totalremaining = TotalSelfStudy - StudyModule.StudyhrsSave[i];
+                    //if statment to check if the user has enough for the week
+                    if (StudyModule.StudyhrsSave[i] >= SelfStudy )
+                    {
+                        remainingself = 0;
+                    }
+                    //if statemnt to check if user has studied enough for semester 
+                    if (StudyModule.StudyhrsSave[i] >= TotalSelfStudy)
+                    {
+                        totalremaining = 0;
+                    }
+                       
+                    
+          
+                    
+             
                     //Borders for each project
                     var border = new Border {
                         BorderBrush = Brushes.Black,
@@ -60,23 +77,32 @@ namespace PROG2B_POE.Pages
                         Margin = new Thickness(5,5,5,5),
                         CornerRadius = new CornerRadius(5)
                     };
+                    
                     var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
                     //make border parent to scope the stack pannel
                     border.Child = stackPanel;
                     stackPanel.Children.Add(new Label {
                         Content = AddNewModulePage.ModuleList[i].ModuleCode +
-                        "\t\t\t\t" +
+                        "\t\t\t\t" + StudyModule.StudyhrsSave[i] +" / "+
                         String.Format("{0:0.00}", SelfStudy) +
                         "\t\t\t\t\t\t"+
                         StudyModule.StudyhrsSave[i]+" / "
                         + String.Format("{0:0.00}", TotalSelfStudy)
                     });
-                    stackPanel.Children.Add(new Label { Content = AddNewModulePage.ModuleList[i].ModuleName });
 
-                    grModuleListing.Children.Add(border);
+                    stackPanel.Children.Add(new Label {
+                        Content = AddNewModulePage.ModuleList[i].ModuleName +
+                        "\t\t\t\t"+
+                         String.Format("{0:0.00}", remainingself)+
+                         " remaining"+"\t\t\t\t\t"+
+                          String.Format("{0:0.00}", totalremaining)+ " remaining"
+                    });
+
+                    grdInnerGrid.Children.Add(border);
                     Grid.SetColumn(border, 1);
                     Grid.SetRow(border, i+2);
                     Grid.SetColumnSpan(border,6);
+                   
 
                 }
 

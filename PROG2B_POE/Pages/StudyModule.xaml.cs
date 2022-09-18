@@ -36,15 +36,16 @@ namespace PROG2B_POE.Pages
                 double previous = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
                 double newhr = previous + Double.Parse(txtStudyHours.Text);
 
+                
 
                 StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
 
                 txtStudyHours.Clear();
             }
-            catch (Exception)
+            catch (Exception ez)
             {
 
-                throw;
+                MessageBox.Show("Error : " + ez.Message);
             }
 
 

@@ -60,5 +60,10 @@ namespace PROG2B_POE
             Pages.StudyModule pgStudy = new Pages.StudyModule();
             FrmNav.Content = pgStudy;
         }
+
+        private void FrmNav_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }
