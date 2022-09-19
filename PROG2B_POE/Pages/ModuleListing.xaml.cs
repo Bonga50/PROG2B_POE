@@ -29,12 +29,13 @@ namespace PROG2B_POE.Pages
 
         private void ListSearch() {
 
+            //Object to call class library methods.
             ProjectModule.TheStudyClass prog = new ProjectModule.TheStudyClass();
             
 
-
             if (AddNewModulePage.ModuleList.Count > 0)
             {
+                //will itarate the list and create new wpf elements based on how many items are stored in the list
                 for (int i = 0; i < AddNewModulePage.ModuleList.Count; i++)
                 {
                     //method call to calculte self study hours 
@@ -51,6 +52,8 @@ namespace PROG2B_POE.Pages
                       AddNewModulePage.ModuleList[i].SemesterEndDate,
                       AddNewModulePage.ModuleList[i].HoursPerWeek
                       );
+                    //method to Check if a week has passed
+                    dateTracker(i);
                     //will calculate the remaining hours weekly and total
 
                     double remainingself =SelfStudy - StudyModule.StudyhrsSave[i];
@@ -65,11 +68,9 @@ namespace PROG2B_POE.Pages
                     {
                         totalremaining = 0;
                     }
-                       
-                    
-          
-                    
-             
+                    dateTracker(i);
+
+
                     //Borders for each project
                     var border = new Border {
                         BorderBrush = Brushes.Black,
@@ -77,7 +78,7 @@ namespace PROG2B_POE.Pages
                         Margin = new Thickness(5,5,5,5),
                         CornerRadius = new CornerRadius(5)
                     };
-                    
+                    //new stack panel that will be used as a template for every new item created
                     var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
                     //make border parent to scope the stack pannel
                     border.Child = stackPanel;
@@ -102,13 +103,33 @@ namespace PROG2B_POE.Pages
                     Grid.SetColumn(border, 1);
                     Grid.SetRow(border, i+2);
                     Grid.SetColumnSpan(border,6);
-                   
 
+                    
+                   
                 }
 
                 
             }
 
+          
+
+        }
+
+        public void dateTracker(int i) {
+            DateTime Currntdate =AddNewModulePage.TrackWeek[i].TheSetDate;
+            DateTime newdate;
+            newdate = Currntdate.AddDays(7);
+
+            if (Currntdate == newdate)
+            {
+                MessageBox.Show("weekly reset is"+ newdate.Date);
+                AddNewModulePage.TrackWeek[i].TheSetDate = newdate;
+                StudyModule.StudyhrsSave[i] = 0;
+
+            }
+            
+            
+        
         }
     }
 }

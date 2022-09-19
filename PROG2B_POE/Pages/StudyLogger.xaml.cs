@@ -20,9 +20,38 @@ namespace PROG2B_POE.Pages
     /// </summary>
     public partial class StudyLogger : Page
     {
-        public StudyLogger()
+        List<Logs> tempLogs = new List<Logs>();
+         public StudyLogger()
         {
             InitializeComponent();
+            populateLogs();
+            cmbLogg.ItemsSource = AddNewModulePage.ModuleNames;
         }
+
+
+        private void populateLogs() {
+            tempLogs = StudyModule.StudyLogs.OrderBy(x => x.Studyhrs).ToList();
+            dtStudyLogger.ItemsSource = tempLogs;
+        }
+
+        private void cmbLogg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            tempLogs = StudyModule.StudyLogs.Where(x => x.ModuleCode == AddNewModulePage.ModuleList[cmbLogg.SelectedIndex].ModuleCode ).ToList();
+            dtStudyLogger.ItemsSource = tempLogs;
+
+        }
+
+        private void btnViewall_Click(object sender, RoutedEventArgs e)
+        {
+            populateLogs();
+        }
+    }
+
+    public class Logs {
+        public DateTime Studydate { get; set; }
+        public Double Studyhrs { get; set; }
+        public String ModuleName { get; set; }
+        public String ModuleCode { get; set; }
     }
 }

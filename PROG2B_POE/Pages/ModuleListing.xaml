@@ -9,10 +9,8 @@
       Title="ModuleListing" >
     <ScrollViewer x:Name="ScrollingList" Height="auto" HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto" CanContentScroll="True" >
-   
+
         <Grid Background="White" x:Name="grModuleListing" >
-        
-            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="auto"/>
@@ -31,11 +29,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-           
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
@@ -75,7 +68,6 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>

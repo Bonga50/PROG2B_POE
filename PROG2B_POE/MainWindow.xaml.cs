@@ -61,9 +61,12 @@ namespace PROG2B_POE
             FrmNav.Content = pgStudy;
         }
 
-        private void FrmNav_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
+ 
 
+        private void btnLogs_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.StudyLogger pgLogger = new Pages.StudyLogger();
+            FrmNav.Content = pgLogger;
         }
     }
 }

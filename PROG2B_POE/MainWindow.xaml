@@ -44,15 +44,18 @@
             </Button.Resources>
         </Button>
         <!--Option2-->
-        <Button x:Name="btnModuleListing" Content="Module List" Grid.Column="1" Grid.Row="2" Width="125" Height="25" Margin="5" Click="btnModuleListing_Click" >
+        <Button x:Name="btnModuleListing" Content="My Modules" Grid.Column="1" Grid.Row="2" Width="125" Height="25" Margin="5" Click="btnModuleListing_Click" >
 
         </Button>
 
         <!--Study option-->
-        <Button x:Name="btnStudyModule" Content="Study" Grid.Column="1" Grid.Row="3" Margin="18,0,18,5" Width="125" Height="25" VerticalAlignment="Top" Click="btnStudyModule_Click" />
+
+        <Button x:Name="btnStudyModule" Content="Study" Grid.Column="1" Grid.Row="3" Margin="5" Width="125" Height="25" VerticalAlignment="Top" Click="btnStudyModule_Click" />
+        <!--Loggs-->
+        <Button x:Name="btnLogs" Content="Study Logs" Grid.Column="1" Grid.Row="4" Margin="5" Width="125" Height="25" Click="btnLogs_Click"/>
         <!--Module -->
     
-            <Frame Grid.Row="2" Grid.Column="3" x:Name="FrmNav" NavigationUIVisibility="Hidden" Width="auto" Height="auto" MaxHeight="450" MaxWidth="800" Margin="10,10,10,5" Grid.ColumnSpan="2" Grid.RowSpan="3" ScrollBar.Scroll="FrmNav_Scroll" >
+            <Frame Grid.Row="2" Grid.Column="3" x:Name="FrmNav" NavigationUIVisibility="Hidden" Width="auto" Height="auto" MaxHeight="450" MaxWidth="800" Margin="10,10,10,5" Grid.ColumnSpan="2" Grid.RowSpan="3"  >
 
         </Frame>
         

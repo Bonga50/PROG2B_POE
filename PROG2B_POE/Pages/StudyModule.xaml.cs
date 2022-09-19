@@ -21,6 +21,7 @@ namespace PROG2B_POE.Pages
     public partial class StudyModule : Page
     {
         public static List<Double> StudyhrsSave = new List<Double>();
+        public static List<Logs> StudyLogs = new List<Logs>();
         public StudyModule()
         {
             InitializeComponent();
@@ -39,7 +40,12 @@ namespace PROG2B_POE.Pages
                 
 
                 StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
-
+                StudyLogs.Add(new Logs {
+                   ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
+                   Studydate = DateTime.Now,
+                   Studyhrs = Double.Parse (txtStudyHours.Text),
+                   ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName
+                });
                 txtStudyHours.Clear();
             }
             catch (Exception ez)
