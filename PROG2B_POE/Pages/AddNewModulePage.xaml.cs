@@ -67,8 +67,7 @@ namespace PROG2B_POE.Pages
                     TheSetDate = DateTime.Today
                 });
 
-
-
+                clearbox();
             }
             catch (Exception ez)
             {
@@ -77,6 +76,15 @@ namespace PROG2B_POE.Pages
             }
             
 
+        }
+
+        public void clearbox() { 
+            txtModuleCode.Clear();
+            txtModuleName.Clear();
+            txtNumOfCredits.Clear();
+            txtHrsPerWeek.Clear();
+            dpStartDate.SelectedDate = null;
+            dpEndDate.SelectedDate = null;
         }
     }
 

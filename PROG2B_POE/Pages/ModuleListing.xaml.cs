@@ -95,7 +95,7 @@ namespace PROG2B_POE.Pages
                         Content = AddNewModulePage.ModuleList[i].ModuleName +
                         "\t\t\t\t"+
                          String.Format("{0:0.00}", remainingself)+
-                         " remaining"+"\t\t\t\t\t"+
+                         " remaining"+"\t\t\t\t\t    "+
                           String.Format("{0:0.00}", totalremaining)+ " remaining"
                     });
 

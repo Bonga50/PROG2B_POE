@@ -34,7 +34,7 @@ namespace PROG2B_POE
         {
             FrmNav.Content = pgAddMod;
 
-
+            // testing
             ////Button btnTemp = new Button();
             ////btnTemp.Background = Brushes.Red;
             ////btnTemp.BorderBrush = Brushes.Black;
