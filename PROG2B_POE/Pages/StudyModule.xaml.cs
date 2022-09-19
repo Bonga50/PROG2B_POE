@@ -34,8 +34,8 @@ namespace PROG2B_POE.Pages
         {
             try
             {
-                double previous = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
-                double newhr = previous + Double.Parse(txtStudyHours.Text);
+                double previousValue = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
+                double newhr = previousValue + Double.Parse(txtStudyHours.Text);
 
                 
 
