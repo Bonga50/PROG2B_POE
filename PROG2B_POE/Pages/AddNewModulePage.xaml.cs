@@ -65,8 +65,7 @@ namespace PROG2B_POE.Pages
                     SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text)
                 });
 
-
-
+                clearbox();
             }
             catch (Exception ez)
             {

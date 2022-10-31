@@ -47,7 +47,7 @@
         <TextBlock Text="Module Name : " Grid.Column="1" Grid.Row="3" Margin="5" FontSize="14"/>
         <TextBox x:Name="txtModuleName"  Grid.Column="2" Grid.Row="3" Width="175" Margin="5" Height="20" />
         <!--Number of Credits-->
-        <TextBlock Text="Numer of Credits : " Grid.Column="1" Grid.Row="4" Margin="5" FontSize="14"/>
+        <TextBlock Text="Number of Credits : " Grid.Column="1" Grid.Row="4" Margin="5" FontSize="14"/>
         <TextBox x:Name="txtNumOfCredits"  Grid.Column="2" Grid.Row="4" Width="175" Margin="5"  Height="20"/>
         <!-- Class hours per week -->
         <TextBlock Text="Hours per week : " Grid.Column="1" Grid.Row="5" Margin="5" FontSize="14"/>
