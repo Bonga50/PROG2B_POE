@@ -65,7 +65,7 @@ namespace PROG2B_POE.Pages
                     SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text)
                 });
 
-                clearbox();
+
 
             }
             catch (Exception ez)
@@ -86,6 +86,8 @@ namespace PROG2B_POE.Pages
             dpStartDate.SelectedDate = null;
             txtNumOfWeeks.Clear();
         }
+
+       
     }
 
     public class Projects {
