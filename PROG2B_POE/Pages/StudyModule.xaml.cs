@@ -25,7 +25,7 @@ namespace PROG2B_POE.Pages
         public StudyModule()
         {
             InitializeComponent();
-            cmbModuleDropDown.ItemsSource = AddNewModulePage.ModuleNames;
+            cmbModuleDropDown.ItemsSource = AddNewModulePage.ModuleCodes;
             txtStudyHours.IsEnabled = false;
             btnSave.IsEnabled = false;
         }
@@ -37,12 +37,10 @@ namespace PROG2B_POE.Pages
                 double previous = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
                 double newhr = previous + Double.Parse(txtStudyHours.Text);
 
-                
-
                 StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
                 StudyLogs.Add(new Logs {
                    ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
-                   Studydate = DateTime.Now,
+                   Studydate = dtStudydate.SelectedDate.Value,
                    Studyhrs = Double.Parse (txtStudyHours.Text),
                    ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName
                 });
@@ -54,10 +52,7 @@ namespace PROG2B_POE.Pages
                 MessageBox.Show("Error : " + ez.Message);
             }
 
-
         }
-
-   
 
         private void cmbModuleDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

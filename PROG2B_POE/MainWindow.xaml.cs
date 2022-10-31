@@ -7,11 +7,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace PROG2B_POE
 {
@@ -33,20 +35,6 @@ namespace PROG2B_POE
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             FrmNav.Content = pgAddMod;
-
-
-            ////Button btnTemp = new Button();
-            ////btnTemp.Background = Brushes.Red;
-            ////btnTemp.BorderBrush = Brushes.Black;
-
-            ////var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
-            ////stackPanel.Children.Add(new Label { Content = "ModuleName" });
-            ////stackPanel.Children.Add(new Button { Content = "Button" });
-
-            ////MainGrid.Children.Add(stackPanel);
-            //////MainGrid.Children.Add(btnTemp);
-            ////Grid.SetColumn(stackPanel, 3);
-            ////Grid.SetRow(stackPanel, 2);
         }
 
         private void btnModuleListing_Click(object sender, RoutedEventArgs e)
@@ -67,6 +55,22 @@ namespace PROG2B_POE
         {
             Pages.StudyLogger pgLogger = new Pages.StudyLogger();
             FrmNav.Content = pgLogger;
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            //https://www.c-sharpcorner.com/UploadFile/mahesh/messagebox-in-wpf/
+
+            MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to close this window?",
+            "LogOut", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Register_Login register_LoginOBJ = new Register_Login();
+                register_LoginOBJ.Show();
+                this.Close();
+
+            }
+
         }
     }
 }

@@ -25,7 +25,8 @@ namespace PROG2B_POE.Pages
         //A parralel list that holds the study hours
         public static List<Double> StudyHrs = new List<Double>();
         //Name of modules in list, this will be used to view modules in study option
-        public static List<String> ModuleNames = new List<String>();
+        public static List<String> ModuleCodes = new List<String>();
+        //will be used to keep track of weeks
         public static List<weekTrack> TrackWeek = new List<weekTrack>();
         public AddNewModulePage()
         {
@@ -38,36 +39,33 @@ namespace PROG2B_POE.Pages
             //Errorhandling
             try
             {
-                if (dpStartDate.SelectedDate.Value > dpEndDate.SelectedDate.Value)
-                {
-                    throw new Exception("Strart date can not be after end date");
-                }
-
+               
                 if (ModuleList.Exists(x => x.ModuleCode == txtModuleCode.Text)) {
                     throw new Exception("Project already exists");
                 }
-
+                //Adding a module to the list
                 ModuleList.Add(new Projects
                 {
                     ModuleCode = txtModuleCode.Text,
                     ModuleName = txtModuleName.Text,
                     NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
                     HoursPerWeek = double.Parse(txtHrsPerWeek.Text),
-                    SemesterStartDate = dpStartDate.SelectedDate.Value,
-                    SemesterEndDate = dpEndDate.SelectedDate.Value
-
+                    SemesterStartDate = dpStartDate.SelectedDate.Value,                    
+                    SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text)
                 });
 
-                ModuleNames.Add(txtModuleName.Text);
+                ModuleCodes.Add(txtModuleCode.Text);
                 StudyModule.StudyhrsSave.Add(0);
 
                 TrackWeek.Add(new weekTrack
                 {
                     ModuleCode = txtModuleCode.Text,
-                    TheSetDate = DateTime.Today
+                    TheSetDate = DateTime.Today,
+                    SemStartDate = dpStartDate.SelectedDate.Value,
+                    SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text)
                 });
 
-
+                clearbox();
 
             }
             catch (Exception ez)
@@ -78,6 +76,16 @@ namespace PROG2B_POE.Pages
             
 
         }
+
+        public void clearbox()
+        {
+            txtModuleCode.Clear();
+            txtModuleName.Clear();
+            txtNumOfCredits.Clear();
+            txtHrsPerWeek.Clear();
+            dpStartDate.SelectedDate = null;
+            txtNumOfWeeks.Clear();
+        }
     }
 
     public class Projects {
@@ -86,13 +94,16 @@ namespace PROG2B_POE.Pages
         public int NumOfCredits { get; set; }
         public double HoursPerWeek { get; set; }
         public DateTime SemesterStartDate { get; set; }
-        public DateTime SemesterEndDate { get; set; }
+        public int SemesterWeeks { get; set; }
 
     }
 
     public class weekTrack{
        public DateTime TheSetDate { get; set; }
        public String ModuleCode { get; set; }
+       public DateTime SemStartDate { get; set; }
+       public int SemesterWeeks { get; set; }
+
 
     }
 }

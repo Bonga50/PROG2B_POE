@@ -43,13 +43,13 @@ namespace PROG2B_POE.Pages
                     double SelfStudy = prog.SelfStudy(
                         AddNewModulePage.ModuleList[i].NumOfCredits,
                         AddNewModulePage.ModuleList[i].SemesterStartDate,
-                        AddNewModulePage.ModuleList[i].SemesterEndDate,
+                        AddNewModulePage.ModuleList[i].SemesterWeeks,
                         AddNewModulePage.ModuleList[i].HoursPerWeek
                         );
                     double TotalSelfStudy = prog.TotalhrsPreMod(
                       AddNewModulePage.ModuleList[i].NumOfCredits,
                       AddNewModulePage.ModuleList[i].SemesterStartDate,
-                      AddNewModulePage.ModuleList[i].SemesterEndDate,
+                      AddNewModulePage.ModuleList[i].SemesterWeeks,
                       AddNewModulePage.ModuleList[i].HoursPerWeek
                       );
                     //method to Check if a week has passed
@@ -93,10 +93,14 @@ namespace PROG2B_POE.Pages
 
                     stackPanel.Children.Add(new Label {
                         Content = AddNewModulePage.ModuleList[i].ModuleName +
-                        "\t\t\t\t"+
-                         String.Format("{0:0.00}", remainingself)+
-                         " remaining"+"\t\t\t\t\t"+
+                        "\t\t\t   "+ String.Format("{0:0.00}", remainingself)+" remaining"+"\t\t\t\t\t"+
                           String.Format("{0:0.00}", totalremaining)+ " remaining"
+                    });
+                    stackPanel.Children.Add(new Label
+                    {
+                        Content = "Number of credits: "+ AddNewModulePage.ModuleList[i].NumOfCredits+ "\t\t"+
+                        "Class hrs: " + AddNewModulePage.ModuleList[i].HoursPerWeek+"\t\t\t\t" +
+                        "Start Date: " + AddNewModulePage.ModuleList[i].SemesterStartDate
                     });
 
                     grdInnerGrid.Children.Add(border);

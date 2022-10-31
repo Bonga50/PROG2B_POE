@@ -25,7 +25,7 @@ namespace PROG2B_POE.Pages
         {
             InitializeComponent();
             populateLogs();
-            cmbLogg.ItemsSource = AddNewModulePage.ModuleNames;
+            cmbLogg.ItemsSource = AddNewModulePage.ModuleCodes;
         }
 
 

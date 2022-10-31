@@ -33,10 +33,10 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <!--Titles-->
-            <TextBlock Text="Module" Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15"/>
-            <TextBlock Text="Study Hours &#x0a;Required Weekly " Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Center"/>
+            <TextBlock Text="Module" Grid.Column="1" Grid.Row="1" Margin="5" FontSize="15" MinWidth="180" Width="auto"/>
+            <TextBlock Text="Study Hours &#x0a;Required Weekly " Grid.Column="3" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Center" MinWidth="280" Width="auto"/>
 
-            <TextBlock Text="Total &#x0a;Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right"/>
+            <TextBlock Text="Total &#x0a;Hours" Grid.Column="6" Grid.Row="1" Margin="5" FontSize="15" HorizontalAlignment="Right" MinWidth="180" Width="auto"/>
             <!--Inner Grid to hold newlly created items-->
             <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <Grid x:Name="grdInnerGrid">
