@@ -63,5 +63,7 @@ namespace PROG2B_POE.Pages
             txtStudyHours.IsEnabled = true;
             btnSave.IsEnabled = true;
         }
+
+       
     }
 }

@@ -77,28 +77,16 @@ namespace PROG2B_POE.Pages
                     stackPanel.Children.Add(new Label
                     {
                         Content =
-                        "Code: "+AddNewModulePage.ModuleList[i].ModuleCode + "\t\t\t" +
-                        StudyModule.StudyhrsSave[i] + " / " + String.Format("{0:0.00}", SelfStudy) + "\t\t\t\t\t\t" +
-                        StudyModule.StudyhrsSave[i] + " / " + String.Format("{0:0.00}", TotalSelfStudy)
-                    });
-
-                    stackPanel.Children.Add(new Label
-                    {
-                        Content =
-                        "Name: "+AddNewModulePage.ModuleList[i].ModuleName + "\t\t  " +
-                        String.Format("{0:0.00}", remainingself) + " remaining" + "\t\t\t\t\t" +
-                        String.Format("{0:0.00}", totalremaining) + " remaining"
-                    });
-                    stackPanel.Children.Add(new Label
-                    {
-                        Content =
-                        "Number of credits: " + AddNewModulePage.ModuleList[i].NumOfCredits + "\t\t" +
-                        "Class hrs: " + AddNewModulePage.ModuleList[i].HoursPerWeek + "\t\t\t\t" +
-                        "Start Date: " + AddNewModulePage.ModuleList[i].SemesterStartDate
-                    });
-                    stackPanel.Children.Add(new Label
-                    {
-                        Content = "Weeks: " + AddNewModulePage.ModuleList[i].SemesterWeeks
+                        "Code: "+AddNewModulePage.ModuleList[i].ModuleCode+"\t\t\t\t\t"+ "\n" +
+                        "Weekly hrs :  "+StudyModule.StudyhrsSave[i] + " / " + String.Format("{0:0.00}", SelfStudy) + "\n" +
+                        "Semester hrs:   "+StudyModule.StudyhrsSave[i] + " / " + String.Format("{0:0.00}", TotalSelfStudy)+"\n"+
+                        "Name: " + AddNewModulePage.ModuleList[i].ModuleName + "\n" +
+                        "Remaining weekly hrs: "+String.Format("{0:0.00}", remainingself) + " remaining" + "\n" +
+                        "Semester hrs:  "+String.Format("{0:0.00}", totalremaining) + " remaining"+ "\n" +
+                        "Number of credits: " + AddNewModulePage.ModuleList[i].NumOfCredits + "\n" +
+                        "Class hrs: " + AddNewModulePage.ModuleList[i].HoursPerWeek + "\n" +
+                        "Start Date: " + AddNewModulePage.ModuleList[i].SemesterStartDate+ "\n" +
+                        "Weeks: " + AddNewModulePage.ModuleList[i].SemesterWeeks
                     });
 
                     grdInnerGrid.Children.Add(border);
@@ -106,21 +94,16 @@ namespace PROG2B_POE.Pages
                     Grid.SetRow(border, i + 2);
                     Grid.SetColumnSpan(border, 6);
 
-
-
                 }
 
-
             }
-
-
 
         }
 
         public void dateTracker(int i)
         {
             DateTime Currntdate = AddNewModulePage.TrackWeek[i].TheSetDate;
-            DateTime newdate;
+            DateTime newdate = DateTime.Now;
             newdate = Currntdate.AddDays(7);
 
             if (Currntdate == newdate)
