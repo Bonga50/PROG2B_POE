@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PROG2B_POE.Pages
 {
@@ -34,19 +24,34 @@ namespace PROG2B_POE.Pages
         {
             try
             {
-                if (dtStudydate.SelectedDate.Value == null)
+                //tag for what user is logged in currently
+                Classes.Student em = (Classes.Student)this.Tag;
+                //error handleing
+                if (dtStudydate.SelectedDate.Value == null || dtStudydate.SelectedDate.Value < 
+                    AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate||
+                    dtStudydate.SelectedDate.Value > 
+                    AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays
+                    (AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterWeeks*7))
                 {
-                    throw new Exception("Error : Date is invalid");  
+                    throw new Exception("Error : Date is invalid");
                 }
+                //study hrs control
                 double previousValue = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
                 double newhr = previousValue + Double.Parse(txtStudyHours.Text);
 
                 StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
-                StudyLogs.Add(new Logs {
-                   ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
-                   Studydate = dtStudydate.SelectedDate.Value,
-                   Studyhrs = Double.Parse (txtStudyHours.Text),
-                   ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName
+                StudyLogs.Add(new Logs
+                {
+                    ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
+                    Studydate = dtStudydate.SelectedDate.Value,
+                    Studyhrs = Double.Parse(txtStudyHours.Text),
+                    ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
+                    UserName=em.StudentID,
+                    Weeks = trackWeek(
+                        dtStudydate.SelectedDate.Value,
+                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
+                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
+                        cmbModuleDropDown.SelectedIndex)
                 });
                 txtStudyHours.Clear();
             }
@@ -64,6 +69,36 @@ namespace PROG2B_POE.Pages
             btnSave.IsEnabled = true;
         }
 
-       
+        //this will keep track of what week the user chooses to study in
+        public string trackWeek(DateTime studyDate, DateTime weekStartDate, DateTime weekEndDate, int index)
+        {
+            string week = "";
+            DateTime tempweekStartDate = weekStartDate;
+            DateTime tempweekEndDate = weekEndDate;
+
+            for (int i = 0; i < AddNewModulePage.ModuleList[index].SemesterWeeks; i++)
+            {
+                if (studyDate > tempweekStartDate && studyDate < tempweekEndDate)
+                {
+                    week = "week " + (i + 1);
+                    break;
+                }
+                else
+                {
+                    tempweekStartDate = tempweekEndDate;
+                    tempweekEndDate = tempweekStartDate.AddDays(7);
+                }
+
+            }
+            return week;
+        }
+        public double getWeeklyRemaining(DateTime studyDate, DateTime weekStartDate, DateTime weekEndDate, int index,double studyhrs) {
+            double hrsReamin = 0;
+            for (int i = 0; i < AddNewModulePage.ModuleList[index].SemesterWeeks; i++)
+            {
+
+            }
+            return hrsReamin;
+        }
     }
 }

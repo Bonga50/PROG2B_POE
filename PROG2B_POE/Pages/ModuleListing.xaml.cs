@@ -99,7 +99,7 @@ namespace PROG2B_POE.Pages
             }
 
         }
-
+        //used to reset the weeks based on the current date
         public void dateTracker(int i)
         {
             DateTime Currntdate = AddNewModulePage.TrackWeek[i].TheSetDate;

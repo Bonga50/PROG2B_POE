@@ -51,9 +51,11 @@ namespace PROG2B_POE.Pages
     public class Logs {
         
         public DateTime Studydate { get; set; }
-        public Double Studyhrs { get; set; }
+        public double Studyhrs { get; set; }
+        public double remaininghrs { get; set; }
         public string ModuleName { get; set; }
         public string ModuleCode { get; set; }
         public string Weeks { get; set; }
+        public string UserName { get; set; }
     }
 }

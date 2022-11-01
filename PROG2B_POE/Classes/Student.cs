@@ -1,4 +1,9 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace PROG2B_POE.Classes
 {
@@ -66,5 +71,47 @@ namespace PROG2B_POE.Classes
                 conn.Close();
             }
         }
+        //method used to add new module
+        public void AddNewModule(
+            string Username,
+            string ModuleCode,
+            string ModuleName,
+            int Credits,
+            int hrsPerWeek,
+            DateTime Semesterstart,
+            int Weeks
+
+            )
+        {
+            string text = $"insert into Module values('{ModuleCode}','{ModuleName}',{Credits},{hrsPerWeek},'{Semesterstart}','{Weeks}','{Username}');";
+            using (conn)
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(text, conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                conn.Close();
+            }
+
+        }
+        //mehod used to get module data
+        public List<Pages.Projects> GetModules()
+        {
+            string text = $"select ModuleCode,ModuleName,NumOfCredits,HoursPerWeek,SemesterStartDate,SemesterWeeks from Module;";
+            List<Pages.Projects> result = new List<Pages.Projects>();
+
+            using (conn)
+            {
+                conn.Open();
+                DataTable tap = new DataTable();
+                new SqlDataAdapter(text, conn).Fill(tap);
+               
+                result = tap.Rows.OfType<DataRow>().Select(dr => dr.Field<Pages.Projects>("ModuleCode")).ToList();
+            }
+            return result;
+
+
+        }
+
     }
 }
