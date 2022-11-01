@@ -34,9 +34,37 @@ namespace PROG2B_POE
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindowOBJ = new MainWindow();
-            mainWindowOBJ.Show();
-            this.Close();
+            string UserId = txtUsername.Text;
+            string password = txtPassword.Password.ToString();
+
+            //Student Object
+            Classes.Student ST_OBJ = new Classes.Student();
+            try
+            {
+
+                ST_OBJ.getStudent(UserId);
+                //unhashed password
+                string unhased = Encoding.UTF8.GetString(Convert.FromBase64String(ST_OBJ.Password));
+                //checking if user login details are correct
+                if (UserId.Equals(ST_OBJ.StudentID) && password.Equals(unhased))
+                {
+                    //creating an instace to call the main page once the user details are verified
+                    MainWindow mainWindowOBJ = new MainWindow();
+                    mainWindowOBJ.Tag = ST_OBJ;
+
+                    mainWindowOBJ.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect password or username");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error :"+ex.Message);
+               
+            }
         }
     }
 }

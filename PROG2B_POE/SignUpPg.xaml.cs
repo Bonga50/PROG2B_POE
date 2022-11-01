@@ -30,5 +30,34 @@ namespace PROG2B_POE
             register_LoginOBJ.Show();
             this.Close();
         }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            string UserId = txtUsername.Text;
+            string password = txtPassword.Password.ToString();
+            string Name = txtFirstName.Text;
+            //Hashing the password
+            string hashedPassword = Convert.ToBase64String(Encoding.UTF8.GetBytes(password));
+            try
+            {
+                Classes.Student stuOBJ = new Classes.Student();
+                stuOBJ.createtStudent(UserId, hashedPassword, Name);
+                MessageBox.Show("Succesful sign up, please log in");
+                Clearboxes();
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show(ec.Message);
+
+            }
+            
+
+        }
+
+        private void Clearboxes() {
+            txtFirstName.Clear();
+            txtPassword.Clear();
+            txtUsername.Clear();
+        }
     }
 }

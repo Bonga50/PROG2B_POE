@@ -72,5 +72,13 @@ namespace PROG2B_POE
             }
 
         }
+
+       
+
+        private void LoadedUser(object sender, RoutedEventArgs e)
+        {
+            Classes.Student em = (Classes.Student)this.Tag;
+            this.Title = $"Welcome {em.Name}: ({em.StudentID})";
+        }
     }
 }

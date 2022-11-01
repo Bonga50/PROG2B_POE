@@ -34,6 +34,10 @@ namespace PROG2B_POE.Pages
         {
             try
             {
+                if (dtStudydate.SelectedDate.Value == null)
+                {
+                    throw new Exception("Error : Date is invalid");  
+                }
                 double previousValue = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
                 double newhr = previousValue + Double.Parse(txtStudyHours.Text);
 
