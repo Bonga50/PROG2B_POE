@@ -20,12 +20,16 @@ namespace PROG2B_POE.Pages
     /// </summary>
     public partial class StudyLogger : Page
     {
+        Classes.Student em = new Classes.Student();
         List<Logs> tempLogs = new List<Logs>();
          public StudyLogger()
         {
             InitializeComponent();
             populateLogs();
+            AddNewModulePage.ModuleCodes = em.getCodes(Register_Login.userNameIX);
             cmbLogg.ItemsSource = AddNewModulePage.ModuleCodes;
+
+
         }
 
 

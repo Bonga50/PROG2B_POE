@@ -19,6 +19,8 @@ namespace PROG2B_POE
     /// </summary>
     public partial class Register_Login : Window
     {
+        //username that will be used in all classes
+        public static string userNameIX;
         public Register_Login()
         {
             InitializeComponent();
@@ -49,10 +51,10 @@ namespace PROG2B_POE
                 if (UserId.Equals(ST_OBJ.StudentID) && password.Equals(unhased))
                 {
                     //creating an instace to call the main page once the user details are verified
-                    MainWindow mainWindowOBJ = new MainWindow();
-                    mainWindowOBJ.Tag = ST_OBJ;
-
-                    mainWindowOBJ.Show();
+                    MainWindow mainWindowOBJ1 = new MainWindow();
+                    mainWindowOBJ1.Tag = ST_OBJ;
+                    userNameIX = UserId;
+                    mainWindowOBJ1.Show();
                     this.Close();
                 }
                 else

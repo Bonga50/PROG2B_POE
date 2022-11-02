@@ -95,23 +95,92 @@ namespace PROG2B_POE.Classes
 
         }
         //mehod used to get module data
-        public List<Pages.Projects> GetModules()
+        //https://www.youtube.com/watch?v=F6dkjsmuw6I
+        public List<Pages.Projects> GetModules(string userId)
         {
-            string text = $"select ModuleCode,ModuleName,NumOfCredits,HoursPerWeek,SemesterStartDate,SemesterWeeks from Module;";
-            List<Pages.Projects> result = new List<Pages.Projects>();
+            string text = $@"select ModuleCode as ModuleCode
+            ,ModuleName as ModuleName
+            ,NumOfCredits as NumOfCredits
+            ,HoursPerWeek as HoursPerWeek
+            ,SemesterStartDate as SemesterStartDate
+            ,SemesterWeeks as SemesterWeeks
+            ,Username as Username
+            from Module where Username = '{userId}';";
+            List<Pages.Projects> Proj = null;
 
             using (conn)
             {
                 conn.Open();
-                DataTable tap = new DataTable();
-                new SqlDataAdapter(text, conn).Fill(tap);
+                SqlCommand cmd = new SqlCommand(text,conn);
+                var dataRead = cmd.ExecuteReader();
+                Proj = getList<Pages.Projects>(dataRead);
                
-                result = tap.Rows.OfType<DataRow>().Select(dr => dr.Field<Pages.Projects>("ModuleCode")).ToList();
             }
-            return result;
-
+            return Proj;
 
         }
+
+        public List<T> getList<T>(IDataReader Reader){
+            List<T> lst = new List<T>();
+            while (Reader.Read())
+            {
+                var type = typeof(T);
+                T obj = (T)Activator.CreateInstance(type);
+                foreach (var item in type.GetProperties())
+                {
+                    var propType = item.PropertyType;
+                    item.SetValue(obj, Convert.ChangeType( Reader[item.Name].ToString(),propType));
+                }
+                lst.Add(obj);
+            }
+            return lst;
+        
+        }
+        //Method to create a study log every time the user studies
+        public void CreateLog(
+            string Username,
+            string ModuleCode,
+            DateTime Studydate,
+            double studyhrs,
+            string ModuleName,
+            string weeks
+            ) {
+            string text = $"insert into StudyLogger values('{Username}','{Studydate}',{studyhrs},'{ModuleName}','{ModuleCode}','{weeks}');";
+            using (conn)
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(text, conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                conn.Close();
+            }
+        }
+
+        public void getStudyWeek(string username) { }
+        public List<String> getCodes(string username) {
+            string text = $@"select ModuleCode as ModuleCode from Module where Username = '{username}';";
+            List<String> Proj = new List<string>() ;
+
+
+            using (conn)
+            {
+                SqlCommand cmdSelect = new SqlCommand(text, conn);
+                conn.Open();
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string Codes = (string)reader[0];
+                        Proj.Add(Codes);
+                    }
+                }
+                conn.Close();
+            }
+            return Proj;
+
+        }
+
+
 
     }
 }

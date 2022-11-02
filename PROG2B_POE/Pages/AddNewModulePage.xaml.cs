@@ -39,8 +39,9 @@ namespace PROG2B_POE.Pages
             //Errorhandling
             try
             {
-                //tag for what user is logged in currently
-                Classes.Student em = (Classes.Student)this.Tag;
+                Classes.Student em = new Classes.Student();
+
+
                 if (ModuleList.Exists(x => x.ModuleCode == txtModuleCode.Text)) {
                     throw new Exception("Project already exists");
                 }
@@ -50,14 +51,14 @@ namespace PROG2B_POE.Pages
                     ModuleCode = txtModuleCode.Text,
                     ModuleName = txtModuleName.Text,
                     NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
-                    HoursPerWeek = double.Parse(txtHrsPerWeek.Text),
-                    SemesterStartDate = dpStartDate.SelectedDate.Value,                    
+                    HoursPerWeek = Int32.Parse(txtHrsPerWeek.Text),
+                    SemesterStartDate = dpStartDate.SelectedDate.Value,
                     SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text),
-                    Username = em.StudentID
+                    Username = Register_Login.userNameIX
                 });
 
-                ModuleCodes.Add(txtModuleCode.Text);
-                StudyModule.StudyhrsSave.Add(0);
+
+
 
                 TrackWeek.Add(new weekTrack
                 {
@@ -67,6 +68,16 @@ namespace PROG2B_POE.Pages
                     SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text)
                 });
 
+                //Calling method to add data to database
+                em.AddNewModule(
+                    Register_Login.userNameIX,
+                    txtModuleCode.Text,
+                    txtModuleName.Text,
+                    Int32.Parse(txtNumOfCredits.Text),
+                    Int32.Parse(txtHrsPerWeek.Text),
+                    dpStartDate.SelectedDate.Value,
+                    Int32.Parse(txtNumOfWeeks.Text)
+                    );
 
                 clearbox();
             }
@@ -74,7 +85,7 @@ namespace PROG2B_POE.Pages
             {
                 MessageBox.Show("Error : " + ez.Message);
             }
-            
+
 
         }
 
@@ -88,26 +99,31 @@ namespace PROG2B_POE.Pages
             txtNumOfWeeks.Clear();
         }
 
-       
+
     }
 
     public class Projects {
         public string ModuleCode { get; set; }
         public string ModuleName { get; set; }
         public int NumOfCredits { get; set; }
-        public double HoursPerWeek { get; set; }
+        public int HoursPerWeek { get; set; }
         public DateTime SemesterStartDate { get; set; }
         public int SemesterWeeks { get; set; }
         public string Username { get; set; }
 
     }
 
-    public class weekTrack{
-       public DateTime TheSetDate { get; set; }
-       public String ModuleCode { get; set; }
-       public DateTime SemStartDate { get; set; }
-       public int SemesterWeeks { get; set; }
+    public class weekTrack {
+        public DateTime TheSetDate { get; set; }
+        public String ModuleCode { get; set; }
+        public DateTime SemStartDate { get; set; }
+        public int SemesterWeeks { get; set; }
 
 
     }
-}
+
+    //public class ProjectCodes{
+    //    public String ModuleCode { get; set; }
+    //}
+    
+    }

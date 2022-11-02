@@ -10,12 +10,12 @@ namespace PROG2B_POE.Pages
     /// </summary>
     public partial class StudyModule : Page
     {
-        public static List<Double> StudyhrsSave = new List<Double>();
+        
         public static List<Logs> StudyLogs = new List<Logs>();
         public StudyModule()
         {
             InitializeComponent();
-            cmbModuleDropDown.ItemsSource = AddNewModulePage.ModuleCodes;
+            cmbModuleDropDown.ItemsSource= AddNewModulePage.ModuleCodes;
             txtStudyHours.IsEnabled = false;
             btnSave.IsEnabled = false;
         }
@@ -24,8 +24,7 @@ namespace PROG2B_POE.Pages
         {
             try
             {
-                //tag for what user is logged in currently
-                Classes.Student em = (Classes.Student)this.Tag;
+                Classes.Student em = new Classes.Student();
                 //error handleing
                 if (dtStudydate.SelectedDate.Value == null || dtStudydate.SelectedDate.Value < 
                     AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate||
@@ -36,23 +35,34 @@ namespace PROG2B_POE.Pages
                     throw new Exception("Error : Date is invalid");
                 }
                 //study hrs control
-                double previousValue = StudyhrsSave[cmbModuleDropDown.SelectedIndex];
-                double newhr = previousValue + Double.Parse(txtStudyHours.Text);
-
-                StudyhrsSave[cmbModuleDropDown.SelectedIndex] = newhr;
+                 
                 StudyLogs.Add(new Logs
                 {
                     ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
                     Studydate = dtStudydate.SelectedDate.Value,
                     Studyhrs = Double.Parse(txtStudyHours.Text),
                     ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
-                    UserName=em.StudentID,
+                    UserName= Register_Login.userNameIX,
                     Weeks = trackWeek(
                         dtStudydate.SelectedDate.Value,
                         AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
                         AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
                         cmbModuleDropDown.SelectedIndex)
                 });
+
+                em.CreateLog(
+                    Register_Login.userNameIX,
+                    AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
+                    dtStudydate.SelectedDate.Value,
+                    Double.Parse(txtStudyHours.Text),
+                    AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
+                    trackWeek(
+                        dtStudydate.SelectedDate.Value,
+                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
+                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
+                        cmbModuleDropDown.SelectedIndex)
+                    );
+                
                 txtStudyHours.Clear();
             }
             catch (Exception ez)
