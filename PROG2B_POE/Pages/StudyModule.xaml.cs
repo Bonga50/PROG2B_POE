@@ -36,19 +36,19 @@ namespace PROG2B_POE.Pages
                 }
                 //study hrs control
                  
-                StudyLogs.Add(new Logs
-                {
-                    ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
-                    Studydate = dtStudydate.SelectedDate.Value,
-                    Studyhrs = Double.Parse(txtStudyHours.Text),
-                    ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
-                    UserName= Register_Login.userNameIX,
-                    Weeks = trackWeek(
-                        dtStudydate.SelectedDate.Value,
-                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
-                        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
-                        cmbModuleDropDown.SelectedIndex)
-                });
+                //StudyLogs.Add(new Logs
+                //{
+                //    ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
+                //    Studydate = dtStudydate.SelectedDate.Value,
+                //    Studyhrs = Double.Parse(txtStudyHours.Text),
+                //    ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
+                //    UserName= Register_Login.userNameIX,
+                //    Weeks = trackWeek(
+                //        dtStudydate.SelectedDate.Value,
+                //        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
+                //        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
+                //        cmbModuleDropDown.SelectedIndex)
+                //});
 
                 em.CreateLog(
                     Register_Login.userNameIX,
