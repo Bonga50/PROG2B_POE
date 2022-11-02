@@ -1,0 +1,1 @@
+﻿select sum(Studyhrs) from StudyLogger where Username='stu1';

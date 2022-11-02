@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -10,10 +11,14 @@ namespace PROG2B_POE.Pages
     /// </summary>
     public partial class ModuleListing : Page
     {
-
+        //object used to get the list of modules from the data base
+        
+        
         public ModuleListing()
         {
             InitializeComponent();
+            Classes.Student em = new Classes.Student();
+            AddNewModulePage.ModuleList = em.GetModules(Register_Login.userNameIX);
             ListSearch();
         }
 
@@ -22,10 +27,8 @@ namespace PROG2B_POE.Pages
 
             //Object to call class library methods.
             ProjectModule.TheStudyClass prog = new ProjectModule.TheStudyClass();
-            Classes.Student em = new Classes.Student();
-            AddNewModulePage.ModuleList = em.GetModules(Register_Login.userNameIX);
 
-            if (AddNewModulePage.ModuleList.Count>0)
+            if (AddNewModulePage.ModuleList != null)
             {
                 
                 //will itarate the list and create new wpf elements based on how many items are stored in the list
@@ -45,25 +48,22 @@ namespace PROG2B_POE.Pages
                       AddNewModulePage.ModuleList[i].SemesterWeeks,
                       AddNewModulePage.ModuleList[i].HoursPerWeek
                       );
-                    //method to Check if a week has passed
-                    //dateTracker(i);
+                   
                     //will calculate the remaining hours weekly and total
+                    DateTime curretdate = DateTime.Now;
 
-                    double remainingself = 0;/*SelfStudy - StudyModule.StudyhrsSave[i];*/
-                    double totalremaining = 0;/*TotalSelfStudy - StudyModule.StudyhrsSave[i];*/
-                    //if statment to check if the user has enough for the week
-                    //if (StudyModule.StudyhrsSave[i] >= SelfStudy)
-                    //{
-                    //    remainingself = 0;
-                    //}
-                    ////if statemnt to check if user has studied enough for semester 
-                    //if (StudyModule.StudyhrsSave[i] >= TotalSelfStudy)
-                    //{
-                    //    totalremaining = 0;
-                    //}
-                    //dateTracker(i);
+                    //object used to get total 
+                    Classes.Student Calc = new Classes.Student();
+                    List<double> totalhrsDone = Calc.getTotalhrs(Register_Login.userNameIX, AddNewModulePage.ModuleList[i].ModuleCode);
 
-
+                    /*SelfStudy - StudyModule.StudyhrsSave[i];*/
+                    double totalremaining = totalhrsDone[0];/*TotalSelfStudy - StudyModule.StudyhrsSave[i];*/
+                  
+                    StudyModule studyObj = new StudyModule();
+                    string week = studyObj.trackWeek(curretdate, AddNewModulePage.ModuleList[i].SemesterStartDate, AddNewModulePage.ModuleList[i].SemesterStartDate.AddDays(7),i);
+                    Classes.Student CalcVi = new Classes.Student();
+                    List<double> weekhrs = CalcVi.getStudyWeekhrs(Register_Login.userNameIX,AddNewModulePage.ModuleList[i].ModuleCode, week);
+                    double remainingself = weekhrs[0];
                     //Borders for each project
                     var border = new Border
                     {
@@ -81,8 +81,8 @@ namespace PROG2B_POE.Pages
                     {
                         Content =
                         "Code: "+AddNewModulePage.ModuleList[i].ModuleCode+"\t\t\t\t\t"+ "\n" +
-                        "Weekly hrs :  " + /*StudyModule.StudyhrsSave[i] +*/ " / " + String.Format("{0:0.00}", SelfStudy) + "\n" +
-                        "Semester hrs:   " + /*StudyModule.StudyhrsSave[i] +*/ " / " + String.Format("{0:0.00}", TotalSelfStudy) + "\n" +
+                        "Weekly hrs :  " + remainingself+ " / " + String.Format("{0:0.00}", SelfStudy) + "\n" +
+                        "Semester hrs:   " + totalremaining + " / " + String.Format("{0:0.00}", TotalSelfStudy) + "\n" +
                         "Name: " + AddNewModulePage.ModuleList[i].ModuleName + "\n" +
                         "Remaining weekly hrs: "+String.Format("{0:0.00}", remainingself) + " remaining" + "\n" +
                         "Semester hrs:  "+String.Format("{0:0.00}", totalremaining) + " remaining"+ "\n" +
@@ -120,5 +120,7 @@ namespace PROG2B_POE.Pages
 
 
         }
+
+        
     }
 }

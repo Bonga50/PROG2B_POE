@@ -21,29 +21,30 @@ namespace PROG2B_POE.Pages
     public partial class StudyLogger : Page
     {
         Classes.Student em = new Classes.Student();
+        Classes.Student log = new Classes.Student();
         List<Logs> tempLogs = new List<Logs>();
          public StudyLogger()
         {
             InitializeComponent();
-            populateLogs();
+            
             AddNewModulePage.ModuleCodes = em.getCodes(Register_Login.userNameIX);
             cmbLogg.ItemsSource = AddNewModulePage.ModuleCodes;
-
+            StudyModule.StudyLogs = log.getLogs(Register_Login.userNameIX);
+            populateLogs();
 
         }
 
 
-        private void populateLogs() {
-            tempLogs = StudyModule.StudyLogs.OrderBy(x => x.Studyhrs).ToList();
-            dtStudyLogger.ItemsSource = tempLogs;
+        private  void  populateLogs() {
+
+                tempLogs = StudyModule.StudyLogs.OrderBy(x => x.Studyhrs).ToList();
+                dtStudyLogger.ItemsSource = tempLogs;
         }
 
         private void cmbLogg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
             tempLogs = StudyModule.StudyLogs.Where(x => x.ModuleCode == AddNewModulePage.ModuleList[cmbLogg.SelectedIndex].ModuleCode ).ToList();
             dtStudyLogger.ItemsSource = tempLogs;
-
         }
 
         private void btnViewall_Click(object sender, RoutedEventArgs e)
@@ -56,7 +57,6 @@ namespace PROG2B_POE.Pages
         
         public DateTime Studydate { get; set; }
         public double Studyhrs { get; set; }
-        public double remaininghrs { get; set; }
         public string ModuleName { get; set; }
         public string ModuleCode { get; set; }
         public string Weeks { get; set; }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace PROG2B_POE.Classes
 {
@@ -111,16 +109,17 @@ namespace PROG2B_POE.Classes
             using (conn)
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(text,conn);
+                SqlCommand cmd = new SqlCommand(text, conn);
                 var dataRead = cmd.ExecuteReader();
                 Proj = getList<Pages.Projects>(dataRead);
-               
+
             }
             return Proj;
 
         }
 
-        public List<T> getList<T>(IDataReader Reader){
+        public List<T> getList<T>(IDataReader Reader)
+        {
             List<T> lst = new List<T>();
             while (Reader.Read())
             {
@@ -129,12 +128,12 @@ namespace PROG2B_POE.Classes
                 foreach (var item in type.GetProperties())
                 {
                     var propType = item.PropertyType;
-                    item.SetValue(obj, Convert.ChangeType( Reader[item.Name].ToString(),propType));
+                    item.SetValue(obj, Convert.ChangeType(Reader[item.Name].ToString(), propType));
                 }
                 lst.Add(obj);
             }
             return lst;
-        
+
         }
         //Method to create a study log every time the user studies
         public void CreateLog(
@@ -144,7 +143,8 @@ namespace PROG2B_POE.Classes
             double studyhrs,
             string ModuleName,
             string weeks
-            ) {
+            )
+        {
             string text = $"insert into StudyLogger values('{Username}','{Studydate}',{studyhrs},'{ModuleName}','{ModuleCode}','{weeks}');";
             using (conn)
             {
@@ -156,10 +156,38 @@ namespace PROG2B_POE.Classes
             }
         }
 
-        public void getStudyWeek(string username) { }
-        public List<String> getCodes(string username) {
+        public List<double> getStudyWeekhrs(string username,string ModCode,string weeks)
+        {
+            string text = $@"select sum(Studyhrs) from StudyLogger where Username = '{username}' and ModuleCode = '{ModCode}' and weeks = '{weeks}';";
+            List<double> hrs = new List<double>();
+            hrs.Add(0);
+            using (conn)
+            {
+                SqlCommand cmdSelect = new SqlCommand(text, conn);
+                conn.Open();
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                    reader.Read();
+                    if (reader.IsDBNull(0) != true)
+                    {
+
+                        double thrs = Convert.ToDouble(reader[0]);
+                        hrs[0] = thrs;
+                    }
+                    else
+                    {
+                        hrs[0] = 0;
+                    }
+
+                }
+                conn.Close();
+            }
+            return hrs;
+        }
+        public List<String> getCodes(string username)
+        {
             string text = $@"select ModuleCode as ModuleCode from Module where Username = '{username}';";
-            List<String> Proj = new List<string>() ;
+            List<String> Proj = new List<string>();
 
 
             using (conn)
@@ -181,6 +209,51 @@ namespace PROG2B_POE.Classes
         }
 
 
+        public List<Pages.Logs> getLogs(string UserID)
+        {
+            string text = $@"select Studydate,Studyhrs,ModuleName,ModuleCode,Weeks,UserName from StudyLogger where Username = '{UserID}';";
+            List<Pages.Logs> Proj = null;
+
+            using (conn)
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(text, conn);
+                var dataRead = cmd.ExecuteReader();
+                Proj = getList<Pages.Logs>(dataRead);
+
+            }
+            return Proj;
+        }
+
+        public List<double> getTotalhrs(string UserID, string ModCode)
+        {
+            string text = $@"select sum(Studyhrs) from StudyLogger where Username='{UserID}' and ModuleCode = '{ModCode}';";
+
+            List<double> hrs = new List<double>();
+            hrs.Add(0);
+            using (conn)
+            {
+                SqlCommand cmdSelect = new SqlCommand(text, conn);
+                conn.Open();
+                using (SqlDataReader reader = cmdSelect.ExecuteReader())
+                {
+                         reader.Read();
+                        if (reader.IsDBNull(0)!= true)
+                        {
+
+                            double thrs = Convert.ToDouble(reader[0]);
+                            hrs[0] = thrs;
+                        }
+                        else
+                        {
+                            hrs[0] = 0;
+                        }
+                    
+                }
+                conn.Close();
+            }
+            return hrs;
+        }
 
     }
 }

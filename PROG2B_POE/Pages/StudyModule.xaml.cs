@@ -12,10 +12,11 @@ namespace PROG2B_POE.Pages
     {
         
         public static List<Logs> StudyLogs = new List<Logs>();
+        Classes.Student em = new Classes.Student();
         public StudyModule()
         {
             InitializeComponent();
-            cmbModuleDropDown.ItemsSource= AddNewModulePage.ModuleCodes;
+            cmbModuleDropDown.ItemsSource= em.getCodes(Register_Login.userNameIX);
             txtStudyHours.IsEnabled = false;
             btnSave.IsEnabled = false;
         }
@@ -34,21 +35,9 @@ namespace PROG2B_POE.Pages
                 {
                     throw new Exception("Error : Date is invalid");
                 }
-                //study hrs control
-                 
-                //StudyLogs.Add(new Logs
-                //{
-                //    ModuleCode = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleCode,
-                //    Studydate = dtStudydate.SelectedDate.Value,
-                //    Studyhrs = Double.Parse(txtStudyHours.Text),
-                //    ModuleName = AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].ModuleName,
-                //    UserName= Register_Login.userNameIX,
-                //    Weeks = trackWeek(
-                //        dtStudydate.SelectedDate.Value,
-                //        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate,
-                //        AddNewModulePage.ModuleList[cmbModuleDropDown.SelectedIndex].SemesterStartDate.AddDays(7),
-                //        cmbModuleDropDown.SelectedIndex)
-                //});
+                
+                
+                // study hrs control and adds 
 
                 em.CreateLog(
                     Register_Login.userNameIX,
@@ -88,7 +77,7 @@ namespace PROG2B_POE.Pages
 
             for (int i = 0; i < AddNewModulePage.ModuleList[index].SemesterWeeks; i++)
             {
-                if (studyDate > tempweekStartDate && studyDate < tempweekEndDate)
+                if (studyDate >= tempweekStartDate && studyDate <= tempweekEndDate)
                 {
                     week = "week " + (i + 1);
                     break;
@@ -102,13 +91,6 @@ namespace PROG2B_POE.Pages
             }
             return week;
         }
-        public double getWeeklyRemaining(DateTime studyDate, DateTime weekStartDate, DateTime weekEndDate, int index,double studyhrs) {
-            double hrsReamin = 0;
-            for (int i = 0; i < AddNewModulePage.ModuleList[index].SemesterWeeks; i++)
-            {
-
-            }
-            return hrsReamin;
-        }
+      
     }
 }

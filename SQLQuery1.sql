@@ -1,0 +1,1 @@
+﻿select Studydate,Studyhrs,ModuleName,ModuleCode,Weeks,UserName from StudyLogger where Username = 'stu1';

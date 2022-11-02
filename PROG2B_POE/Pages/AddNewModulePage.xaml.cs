@@ -46,16 +46,16 @@ namespace PROG2B_POE.Pages
                     throw new Exception("Project already exists");
                 }
                 //Adding a module to the list
-                ModuleList.Add(new Projects
-                {
-                    ModuleCode = txtModuleCode.Text,
-                    ModuleName = txtModuleName.Text,
-                    NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
-                    HoursPerWeek = Int32.Parse(txtHrsPerWeek.Text),
-                    SemesterStartDate = dpStartDate.SelectedDate.Value,
-                    SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text),
-                    Username = Register_Login.userNameIX
-                });
+                //ModuleList.Add(new Projects
+                //{
+                //    ModuleCode = txtModuleCode.Text,
+                //    ModuleName = txtModuleName.Text,
+                //    NumOfCredits = Int32.Parse(txtNumOfCredits.Text),
+                //    HoursPerWeek = Int32.Parse(txtHrsPerWeek.Text),
+                //    SemesterStartDate = dpStartDate.SelectedDate.Value,
+                //    SemesterWeeks = Int32.Parse(txtNumOfWeeks.Text),
+                //    Username = Register_Login.userNameIX
+                //});
 
 
 

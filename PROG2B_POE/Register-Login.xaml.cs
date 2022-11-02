@@ -50,10 +50,10 @@ namespace PROG2B_POE
                 //checking if user login details are correct
                 if (UserId.Equals(ST_OBJ.StudentID) && password.Equals(unhased))
                 {
+                    userNameIX = UserId;
                     //creating an instace to call the main page once the user details are verified
                     MainWindow mainWindowOBJ1 = new MainWindow();
-                    mainWindowOBJ1.Tag = ST_OBJ;
-                    userNameIX = UserId;
+                    mainWindowOBJ1.Tag = ST_OBJ; 
                     mainWindowOBJ1.Show();
                     this.Close();
                 }
